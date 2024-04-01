@@ -106,6 +106,34 @@ body, html {
     background-color:white
   }
 
+.groups-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+.group-icon {
+    border-radius: 15px;  /* Adjusted for rounded rectangles */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.emoji {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+.group-name {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
 .folders {
     color: black;
     margin-left: auto;
@@ -322,4 +350,97 @@ body, html {
     border-radius: 4px;
     max-width: 300px;
     word-wrap: break-word;
+}
+
+.friend-list {
+    padding: 10px;
+}
+.friend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.friend-info {
+    flex: 1;
+}
+.friend-name {
+    font-weight: bold;
+}
+.friend-message {
+    color: #888;
+}
+.friend-divider {
+    height: 1px;
+    background-color: #ccc;
+    margin: 10px 0;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.message {
+    margin-bottom: 10px;
+}
+
+.message-bubble {
+    max-width: 70%;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.message.received .message-bubble {
+    background-color: #f1f0f0;
+    align-self: flex-start;
+}
+
+.message.sent .message-bubble {
+    background-color: #007aff;
+    color: white;
+    align-self: flex-end;
+}
+
+.message-time {
+    font-size: 12px;
+    color: #888;
+    margin-top: 5px;
+}
+
+.input-bar {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #f2f2f2;
+}
+
+.emoji-button {
+    font-size: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.message-input {
+    flex: 1;
+    height: 30px;
+    border: none;
+    border-radius: 20px;
+    padding: 0 10px;
+    margin-right: 10px;
+}
+
+.send-button {
+    font-size: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
