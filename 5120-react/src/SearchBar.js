@@ -6,9 +6,9 @@ const searchBarStyle = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: '65px',
+    marginTop: '20px',
     backgroundColor: '#E2E7EB',
-    borderRadius: '20px',
+    borderRadius: '10px',
     padding: '1px',
 };
 

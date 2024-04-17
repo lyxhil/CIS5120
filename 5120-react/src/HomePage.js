@@ -14,10 +14,10 @@ import angelinaImage from './images/angelina.png';
 import donaldImage from './images/donald.png';
 
 const allFriends = [
-    { name: 'Brandon', message: 'Lorem ipsum...', image: brandonImage, groupColor: 'rgba(255, 99, 71, 0.5)' },
-    { name: 'Mrs Smith', message: 'Lorem ipsum...', image: mrsSmithImage, groupColor: 'rgba(135, 206, 235, 0.5)' },
-    { name: 'Mr Drew', message: 'Lorem ipsum...', image: mrDrewImage, groupColor: 'rgba(123, 104, 238, 0.5)' },
-    { name: 'Angelina', message: 'Lorem ipsum...', image: angelinaImage, groupColor: 'rgba(60, 179, 113, 0.5)' },
+    { name: 'Brandon', message: 'Are you free for lunch?', image: brandonImage, groupColor: '#000000' },
+    { name: 'Mrs Smith', message: 'Yes, tomorrow 3pm works', image: mrsSmithImage, groupColor: '#24b247' },
+    { name: 'Mr Drew', message: 'How has school been?', image: mrDrewImage, groupColor: 'rgba(123, 104, 238, 0.5)' },
+    { name: 'Angelina', message: 'Sure!', image: angelinaImage, groupColor: 'rgba(60, 179, 113, 0.5)' },
     { name: 'Donald', message: 'Lorem ipsum...', image: donaldImage, groupColor: 'rgba(255, 165, 0, 0.5)' },
 ];
 
@@ -25,11 +25,13 @@ const HomePage = () => {
     return (
         <Frame>
             <StatusBar />
-            <NavigationBar title="Home" />
-            <SearchBar />
-            <ToggleButton />
-            <PinnedChats />
-            <ChatList friends={allFriends} showDeleteButton={false}/>
+            <NavigationBar />
+            <div style={{ marginTop: '70px' }}> {/* Adjust margin-top to create space below the navigation bar */}
+                <SearchBar />
+                <ToggleButton />
+                <PinnedChats />
+                <ChatList friends={allFriends} showDeleteButton={false}/>
+            </div>
         </Frame>
     );
 };

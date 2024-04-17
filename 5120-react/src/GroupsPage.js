@@ -1,25 +1,18 @@
 import React, { useState } from 'react';
 import Frame from './Frame';
 import StatusBar from './StatusBar';
-import NavigationBar from './NavigationBar';
+import GroupsNavigationBar from './GroupsNavigationBar';
 import SearchBar from './SearchBar';
 import ToggleButton from './ToggleButton';
-import Toolbar from './Toolbar';
 import GroupsContainer from './GroupsContainer';
 import GroupForm from './GroupForm';
-import FriendsContainer from './FriendsContainer';
 import groupSignifier from './GroupSignifier';
-import brandonImage from './images/brandon.png';
-import angelaImage from './images/angela.png';
 
 const initialGroups = [
-    { id: 1, name: 'Friends', emoji: '😀', backgroundColor: '#ff9a9e', friends: [
-        { name: 'Brandon', message: 'Hello!', image: brandonImage, groupColor: '#ff9a9e' },
-        { name: 'Angela', message: 'How are you?', image: angelaImage, groupColor: '#ff9a9e' },
-    ] },
-    { id: 2, name: 'Clubs', emoji: '⚽', backgroundColor: '#b8e1fc', friends: [] },
-    { id: 3, name: 'Classes', emoji: '✏️', backgroundColor: '#ffc7a0', friends: [] },
-    { id: 4, name: 'Family', emoji: '👨‍👩‍👧‍👦', backgroundColor: '#dbe7e4', friends: [] },
+    { id: 1, name: 'Friends', emoji: '😀', backgroundColor: '#ff9a9e', friends: [] },
+    { id: 2, name: 'Clubs', emoji: '⚽', backgroundColor: '#ffb434', friends: [] },
+    { id: 3, name: 'Classes', emoji: '✏️', backgroundColor: '#24b247', friends: [] },
+    { id: 4, name: 'Family', emoji: '👨‍👩‍👧‍👦', backgroundColor: '#a988fd', friends: [] },
     { id: 5, name: 'Miscellaneous', emoji: '✨', backgroundColor: '#ffdcb8', friends: [] },
     { id: 6, name: 'Do Not Respond', emoji: '❌', backgroundColor: '#f4b6c2', friends: [] }
 ];
@@ -75,56 +68,26 @@ const GroupsPage = () => {
         setSelectedGroupId(null);
     };
 
-    const handleAddFriend = (groupId, friend) => {
-        const updatedGroups = groups.map(group => {
-            if (group.id === groupId) {
-                return { ...group, friends: [...group.friends, friend] };
-            }
-            return group;
-        });
-        setGroups(updatedGroups);
-    };
-
-    const handleDeleteFriend = (groupId, friendId) => {
-        const updatedGroups = groups.map(group => {
-            if (group.id === groupId) {
-                const updatedFriends = group.friends.filter(friend => friend.id !== friendId);
-                return { ...group, friends: updatedFriends };
-            }
-            return group;
-        });
-        setGroups(updatedGroups);
-    };
-
     return (
         <Frame>
             <StatusBar />
+            <GroupsNavigationBar title={selectedGroupId ? groups.find(group => group.id === selectedGroupId).name : null} onBack={handleBackToGroups} />
+            <div style={{ marginTop: '70px' }}>
+                <SearchBar />
+            </div>
+            <ToggleButton />
             {selectedGroupId ? (
                 <>
-                    <NavigationBar title={groups.find(group => group.id === selectedGroupId).name} onBack={handleBackToGroups} />
-                    <SearchBar />
-                    <ToggleButton />
                     {groupSignifier(groups.find(group => group.id === selectedGroupId))}
-                    <FriendsContainer
+                    {/* <FriendsContainer
                         friends={groups.find(group => group.id === selectedGroupId).friends}
                         onAddFriend={(friend) => handleAddFriend(selectedGroupId, friend)}
                         onDeleteFriend={(friendId) => handleDeleteFriend(selectedGroupId, friendId)}
                         showDeleteButton={false}
-                    />
+                    /> */}
                 </>
             ) : (
                 <>
-                    <NavigationBar title="Groups" />
-                    <SearchBar />
-                    <ToggleButton />
-                    <Toolbar onAdd={handleAddGroup} onDelete={handleDeleteMode} onEdit={handleEditMode} />
-                    {selectedGroup && (
-                        <GroupForm
-                            initialGroup={selectedGroup}
-                            onSubmit={handleSubmitGroup}
-                            onCancel={handleCancelForm}
-                        />
-                    )}
                     <GroupsContainer
                         groups={groups}
                         mode={mode}

@@ -5,10 +5,10 @@ const statusBarStyle = {
     top: 0,
     left: 0,
     width: '100%',
-    height: '20px',
+    height: '15px',
     backgroundColor: '#000',
     color: '#fff',
-    padding: '18px',
+    padding: '15px',
     fontSize: '14px'
 };
 

@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Frame from './Frame';
 import StatusBar from './StatusBar';
-import NavigationBar from './NavigationBar';
 import ToggleButton from './ToggleButton';
 import SearchBar from './SearchBar';
 
@@ -33,6 +32,16 @@ const contacts = [
 ];
 
 const ContactsPage = () => {
+    const [selectedContacts, setSelectedContacts] = useState([]);
+
+    const handleCheckboxChange = (contact) => {
+        if (selectedContacts.includes(contact)) {
+            setSelectedContacts(selectedContacts.filter((c) => c !== contact));
+        } else {
+            setSelectedContacts([...selectedContacts, contact]);
+        }
+    };
+
     const renderContacts = () => {
         let currentGroup = '';
         return contacts.map((contact, index) => {
@@ -46,12 +55,19 @@ const ContactsPage = () => {
                     {groupHeader}
                     <div style={styles.contactRow}>
                         <span style={styles.contactName}>{contact.name}</span>
-                        <input type="checkbox" style={styles.checkbox} />
+                        <input 
+                            type="checkbox" 
+                            style={styles.checkbox} 
+                            checked={selectedContacts.includes(contact)}
+                            onChange={() => handleCheckboxChange(contact)}
+                        />
                     </div>
                 </React.Fragment>
             );
         });
     };
+
+    const isDoneButtonVisible = selectedContacts.length > 0;
 
     return (
         <Frame>
@@ -60,10 +76,11 @@ const ContactsPage = () => {
                 <span style={styles.addTo}>Add to Friends</span>
             </div>
             <div style={styles.topBarRight}>
-                <a href="/" style={styles.cancel}>Cancel</a>
+                <a href="/" style={styles.cancel}>
+                    {isDoneButtonVisible ? 'Done' : 'Cancel'}
+                </a>
             </div>
-            <SearchBar />
-            <ToggleButton />
+            <SearchBar style={styles.searchBar}/>
             <div style={styles.contactList}>
                 {renderContacts()}
             </div>
@@ -105,6 +122,7 @@ const ContactsPage = () => {
 const styles = {
     topBar: {
         textAlign: 'center',
+        marginTop: '28px',
     },
     addTo: {
         fontSize: '18px',
@@ -112,12 +130,16 @@ const styles = {
     },
     topBarRight: {
         position: 'absolute',
-        top: '10px',
+        top: '48px',
         right: '10px',
     },
     cancel: {
         textDecoration: 'none',
         color: 'blue',
+        fontSize: '18px'
+    },
+    searchBar: {
+        marginTop: '0px', 
     },
     contactList: {
         width: '90%',

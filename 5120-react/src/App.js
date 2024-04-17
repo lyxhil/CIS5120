@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './HomePage';
 import GroupsPage from './GroupsPage';
 import ContactsPage from './ContactsPage';
+import FriendsPage from './FriendsPage';
 
 const App = () => {
     return (
