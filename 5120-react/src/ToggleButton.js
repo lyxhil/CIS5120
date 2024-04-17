@@ -18,7 +18,7 @@ const ToggleButton = () => {
                 <a href="/" style={{ textDecoration: 'none', color: 'blue' }}>Home</a>
                 </label>
             <label htmlFor="toggle" style={{ ...labelStyle, backgroundColor: 'white', marginLeft: '5px' }}>
-                <a href="/Groups" style={{ textDecoration: 'none', color: 'blue' }}>Groups</a>
+                <a href="/Groups" style={{ textDecoration: 'none', color: 'blue' }}>Folders</a>
             </label>
             <label htmlFor="toggle" style={{ ...labelStyle, backgroundColor: 'white', marginLeft: '5px' }}>
                 <a href="/Contacts" style={{ textDecoration: 'none', color: 'blue' }}>Contacts</a>

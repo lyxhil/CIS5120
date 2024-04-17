@@ -2,12 +2,12 @@ import React from 'react';
 
 const groupIconStyle = (backgroundColor) => ({
     backgroundColor,
-    borderRadius: '15px',
+    borderRadius: '12px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '120px',
+    height: '150px',
     margin: '10px',
     textDecoration: 'none',
     color: 'black',
@@ -17,7 +17,7 @@ const groupIconStyle = (backgroundColor) => ({
 
 const GroupsContainer = ({ groups, mode, onDelete, onEdit, onGroupClick }) => {
     return (
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', padding: '10px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', padding: '10px', marginTop: '30px' }}>
             {groups.map(group => (
                 <div key={group.id} style={groupIconStyle(group.backgroundColor)} onClick={() => onGroupClick(group.id)}>
                     {mode === 'delete' && (
