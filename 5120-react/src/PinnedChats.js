@@ -12,7 +12,7 @@ import cherylImage from './images/cheryl.png';
 const circleStyle = {
     width: '110px',
     height: '110px',
-    borderRadius: '50%',
+    borderRadius: '40%',
     overflow: 'hidden',
     display: 'flex',
     alignItems: 'center',

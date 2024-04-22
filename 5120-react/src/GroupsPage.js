@@ -22,6 +22,7 @@ const GroupsPage = () => {
     const [mode, setMode] = useState('view'); // 'view', 'delete', 'edit'
     const [selectedGroup, setSelectedGroup] = useState(null);
     const [selectedGroupId, setSelectedGroupId] = useState(null);
+    const [isHomeActive, setIsHomeActive] = useState(false);
 
     const handleAddGroup = () => {
         setSelectedGroup({ name: '', emoji: '', backgroundColor: '#cccccc' });
@@ -67,6 +68,10 @@ const GroupsPage = () => {
     const handleBackToGroups = () => {
         setSelectedGroupId(null);
     };
+    
+    const handleToggleClick = (isHome) => {
+        setIsHomeActive(isHome);
+    }
 
     return (
         <Frame>
@@ -75,7 +80,7 @@ const GroupsPage = () => {
             <div style={{ marginTop: '70px' }}>
                 <SearchBar />
             </div>
-            <ToggleButton />
+            <ToggleButton isHomeActive={isHomeActive} onToggleClick={handleToggleClick} />/>
             {selectedGroupId ? (
                 <>
                     {groupSignifier(groups.find(group => group.id === selectedGroupId))}

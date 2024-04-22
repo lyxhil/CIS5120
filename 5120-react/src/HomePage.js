@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Frame from './Frame';
 import StatusBar from './StatusBar';
 import NavigationBar from './NavigationBar';
@@ -22,13 +22,19 @@ const allFriends = [
 ];
 
 const HomePage = () => {
+    const [isHomeActive, setIsHomeActive] = useState(true);
+
+    const handleToggleClick = (isHome) => {
+        setIsHomeActive(isHome);
+    };
+
     return (
         <Frame>
             <StatusBar />
             <NavigationBar />
             <div style={{ marginTop: '70px' }}> {/* Adjust margin-top to create space below the navigation bar */}
                 <SearchBar />
-                <ToggleButton />
+                <ToggleButton isHomeActive={isHomeActive} onToggleClick={handleToggleClick} />
                 <PinnedChats />
                 <ChatList friends={allFriends} showDeleteButton={false}/>
             </div>
