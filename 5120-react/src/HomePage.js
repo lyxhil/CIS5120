@@ -15,7 +15,7 @@ import angelinaImage from './images/angelina.png';
 import donaldImage from './images/donald.png';
 
 const allFriends = [
-    { name: 'Brandon', message: 'Are you free for lunch?', image: brandonImage, groupColor: '#000000' },
+    { name: 'Brandon', message: 'Are you free for lunch?', image: brandonImage, groupColor: '#000000', route: '/brandon-page' },
     { name: 'Mrs Smith', message: 'Yes, tomorrow 3pm works', image: mrsSmithImage, groupColor: '#24b247' },
     { name: 'Mr Drew', message: 'How has school been?', image: mrDrewImage, groupColor: 'rgba(123, 104, 238, 0.5)' },
     { name: 'Angelina', message: 'Sure!', image: angelinaImage, groupColor: 'rgba(60, 179, 113, 0.5)' },
@@ -33,15 +33,15 @@ const HomePage = () => {
         <Frame>
             <StatusBar />
             <NavigationBar />
-            <div style={{ marginTop: '70px' }}> {/* Adjust margin-top to create space below the navigation bar */}
+            <div style={{ marginTop: '70px' }}> 
                 <SearchBar />
                 <ToggleButton isHomeActive={isHomeActive} onToggleClick={handleToggleClick} />
                 <PinnedChats />
                 <ChatList friends={allFriends} showDeleteButton={false} renderItem={(friend) => (
-                    <Link to={friend.route}>
-                        <div>
+                    <Link to={friend.route} style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
                             <img src={friend.image} alt={friend.name} />
-                            <div>
+                            <div style={{ marginLeft: '10px'}}>
                                 <h3>{friend.name}</h3>
                                 <p>{friend.message}</p>
                             </div>

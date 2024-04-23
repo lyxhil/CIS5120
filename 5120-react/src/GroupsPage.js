@@ -17,7 +17,7 @@ const initialGroups = [
     { id: 6, name: 'Do Not Respond', emoji: '❌', backgroundColor: '#f4b6c2', friends: [] }
 ];
 
-const GroupsPage = () => {
+const FoldersPage = () => {
     const [groups, setGroups] = useState(initialGroups);
     const [mode, setMode] = useState('view'); // 'view', 'delete', 'edit'
     const [selectedGroup, setSelectedGroup] = useState(null);
@@ -106,4 +106,4 @@ const GroupsPage = () => {
     );
 };
 
-export default GroupsPage;
+export default FoldersPage;

@@ -17,7 +17,7 @@ const ChatMessage = ({ message, isSender }) => {
 };
 
 // Chat page component
-const ChatPage = () => {
+const BrandonPage = () => {
   const [messages, setMessages] = useState([
     { text: "Hey there!", isSender: true },
     { text: "Hi! How are you?", isSender: false },
@@ -47,4 +47,4 @@ const ChatPage = () => {
   );
 };
 
-export default ChatPage;
+export default BrandonPage;
