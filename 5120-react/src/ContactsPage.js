@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Frame from './Frame';
 import StatusBar from './StatusBar';
-import ToggleButton from './ToggleButton';
 import SearchBar from './SearchBar';
+import Keyboard from './Keyboard';
 
 const contacts = [
     { group: 'A', name: 'Amos' },
@@ -33,6 +33,7 @@ const contacts = [
 
 const ContactsPage = () => {
     const [selectedContacts, setSelectedContacts] = useState([]);
+    const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
 
     const handleCheckboxChange = (contact) => {
         if (selectedContacts.includes(contact)) {
@@ -41,6 +42,10 @@ const ContactsPage = () => {
             setSelectedContacts([...selectedContacts, contact]);
         }
     };
+
+    const toggleKeyboard = () => {
+        setIsKeyboardOpen(!isKeyboardOpen);
+    }
 
     const renderContacts = () => {
         let currentGroup = '';
@@ -80,7 +85,7 @@ const ContactsPage = () => {
                     {isDoneButtonVisible ? 'Done' : 'Cancel'}
                 </a>
             </div>
-            <SearchBar style={styles.searchBar}/>
+            <SearchBar style={styles.searchBar} onClick={toggleKeyboard} />
             <div style={styles.contactList}>
                 {renderContacts()}
             </div>
@@ -115,6 +120,7 @@ const ContactsPage = () => {
                     <li><a href="#num">#</a></li>
                 </ol>
             </div>
+            {isKeyboardOpen && <Keyboard onKeyPress={(key) => console.log(key)} />}
         </Frame>
     );
 };

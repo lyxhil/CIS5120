@@ -7,6 +7,7 @@ import ToggleButton from './ToggleButton';
 import PinnedChats from './PinnedChats';
 import ChatList from './ChatList';
 import { Link } from 'react-router-dom';
+import Keyboard from './Keyboard';
 
 import brandonImage from './images/brandon.png';
 import mrsSmithImage from './images/mrssmith.png';
@@ -24,17 +25,22 @@ const allFriends = [
 
 const HomePage = () => {
     const [isHomeActive, setIsHomeActive] = useState(true);
+    const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
 
     const handleToggleClick = (isHome) => {
         setIsHomeActive(isHome);
     };
+
+    const toggleKeyboard = () => {
+        setIsKeyboardOpen(!isKeyboardOpen);
+    }
 
     return (
         <Frame>
             <StatusBar />
             <NavigationBar />
             <div style={{ marginTop: '70px' }}> 
-                <SearchBar />
+                <SearchBar onClick={toggleKeyboard} />
                 <ToggleButton isHomeActive={isHomeActive} onToggleClick={handleToggleClick} />
                 <PinnedChats />
                 <ChatList friends={allFriends} showDeleteButton={false} renderItem={(friend) => (
@@ -49,6 +55,7 @@ const HomePage = () => {
                     </Link>
                 )}/>
             </div>
+            {isKeyboardOpen && <Keyboard onKeyPress={(key) => console.log(key)} />}
         </Frame>
     );
 };

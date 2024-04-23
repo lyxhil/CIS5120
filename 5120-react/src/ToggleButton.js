@@ -34,9 +34,9 @@ const ToggleButton = ({ isHomeActive, onToggleClick }) => {
             <label htmlFor="toggle" style={{ ...folderLabelStyle, marginLeft: '5px' }} onClick={() => onToggleClick(false)}>
                 <a href="/groups" style={{ textDecoration: 'none', color: isHomeActive ? 'blue' : 'white' }}>Folders</a>
             </label>
-            {/* <label htmlFor="toggle" style={{ ...labelStyle, marginLeft: '5px' }}>
+            <label htmlFor="toggle" style={{ ...homeLabelStyle, marginLeft: '5px' }}>
                 <a href="/contacts" style={{ textDecoration: 'none', color: 'blue' }}>Contacts</a>
-            </label> */}
+            </label>
         </div>
     );
 };

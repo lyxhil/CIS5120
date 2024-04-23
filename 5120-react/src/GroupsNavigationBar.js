@@ -1,4 +1,5 @@
 import React from 'react';
+import newChat from './images/newchat.png'
 
 const GroupsNavigationBar = ({ title }) => {
     return (
@@ -10,14 +11,12 @@ const GroupsNavigationBar = ({ title }) => {
                 <span style={{ fontSize: '20px' }}>{title}</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center' }}>
-                <span style={{ textDecoration: 'none', color: 'black', marginRight: '200px', fontSize: '18px', fontWeight: 'bold' }}>
+                <span style={{ textDecoration: 'none', color: 'black', marginRight: '150px', fontSize: '18px', fontWeight: 'bold' }}>
                     Folders
                 </span>
-                {/* Add your icon component here */}
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" style={{ fill: 'currentcolor' }}>
-                    <path d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M18 9v4H6V9H4v6h16V9h-2z"/>
-                </svg>
+            <div style={{ display: 'flex', alignItems: 'center'}}>
+                <img src={newChat} alt="new" style={{ width: '35px', height: '35px', marginRight: "40px" }} />
+            </div>
             </div>
         </div>
     );
