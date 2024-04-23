@@ -80,7 +80,7 @@ const GroupsPage = () => {
             <div style={{ marginTop: '70px' }}>
                 <SearchBar />
             </div>
-            <ToggleButton isHomeActive={isHomeActive} onToggleClick={handleToggleClick} />/>
+            <ToggleButton isHomeActive={isHomeActive} onToggleClick={handleToggleClick} />
             {selectedGroupId ? (
                 <>
                     {groupSignifier(groups.find(group => group.id === selectedGroupId))}

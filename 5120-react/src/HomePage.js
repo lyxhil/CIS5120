@@ -6,6 +6,7 @@ import SearchBar from './SearchBar';
 import ToggleButton from './ToggleButton';
 import PinnedChats from './PinnedChats';
 import ChatList from './ChatList';
+import { Link } from 'react-router-dom';
 
 import brandonImage from './images/brandon.png';
 import mrsSmithImage from './images/mrssmith.png';
@@ -36,7 +37,17 @@ const HomePage = () => {
                 <SearchBar />
                 <ToggleButton isHomeActive={isHomeActive} onToggleClick={handleToggleClick} />
                 <PinnedChats />
-                <ChatList friends={allFriends} showDeleteButton={false}/>
+                <ChatList friends={allFriends} showDeleteButton={false} renderItem={(friend) => (
+                    <Link to={friend.route}>
+                        <div>
+                            <img src={friend.image} alt={friend.name} />
+                            <div>
+                                <h3>{friend.name}</h3>
+                                <p>{friend.message}</p>
+                            </div>
+                        </div>
+                    </Link>
+                )}/>
             </div>
         </Frame>
     );
