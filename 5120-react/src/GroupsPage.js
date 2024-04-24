@@ -9,15 +9,15 @@ import GroupForm from './GroupForm';
 import groupSignifier from './GroupSignifier';
 
 const initialGroups = [
-    { id: 1, name: 'Friends', emoji: '😀', backgroundColor: '#ff9a9e', friends: [] },
-    { id: 2, name: 'Clubs', emoji: '⚽', backgroundColor: '#ffb434', friends: [] },
-    { id: 3, name: 'Classes', emoji: '✏️', backgroundColor: '#24b247', friends: [] },
-    { id: 4, name: 'Family', emoji: '👨‍👩‍👧‍👦', backgroundColor: '#a988fd', friends: [] },
-    { id: 5, name: 'Miscellaneous', emoji: '✨', backgroundColor: '#ffdcb8', friends: [] },
+    { id: 1, name: 'Friends', emoji: '❤️', backgroundColor: '#ff9a9e', friends: [] },
+    { id: 2, name: 'Clubs', emoji: '🏊‍♀️', backgroundColor: '#ffb434', friends: [] },
+    { id: 3, name: 'Classes', emoji: '📖', backgroundColor: '#24b247', friends: [] },
+    { id: 4, name: 'Family', emoji: '👨‍👩‍👧', backgroundColor: '#a988fd', friends: [] },
+    { id: 5, name: 'Miscellaneous', emoji: '❓', backgroundColor: '#ffdcb8', friends: [] },
     { id: 6, name: 'Do Not Respond', emoji: '❌', backgroundColor: '#f4b6c2', friends: [] }
 ];
 
-const FoldersPage = () => {
+const GroupsPage = () => {
     const [groups, setGroups] = useState(initialGroups);
     const [mode, setMode] = useState('view'); // 'view', 'delete', 'edit'
     const [selectedGroup, setSelectedGroup] = useState(null);
@@ -106,4 +106,4 @@ const FoldersPage = () => {
     );
 };
 
-export default FoldersPage;
+export default GroupsPage;
