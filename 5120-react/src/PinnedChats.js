@@ -39,15 +39,15 @@ const nameStyle = {
 
 const PinnedChats = () => {
     const pinnedChats = [
-        { name: 'Katie', image: katieImage, groupColor: '#ff9a9e' },
-        { name: 'Ben', image: benImage, groupColor: '#a988fd' },
+        { name: 'Katie', image: katieImage, groupColor: '#24B247' },
+        { name: 'Ben', image: benImage, groupColor: '#A988FD' },
         { name: 'Matt', image: mattImage, groupColor: '#ffb434' },
-        { name: 'Mum', image: mumImage, groupColor: '#a988fd' },
+        { name: 'Mum', image: mumImage, groupColor: '#A988FD' },
         { name: 'Angela', image: angelaImage, groupColor: '#ffb434' },
-        { name: 'Briana', image: brianaImage, groupColor: '#ff9a9e' },
-        { name: 'Grandpa', image: grandpaImage, groupColor: '#a988fd' },
+        { name: 'Briana', image: brianaImage, groupColor: '#24B247' },
+        { name: 'Grandpa', image: grandpaImage, groupColor: '#A988FD' },
         { name: 'Grace', image: graceImage, groupColor: '#ffb434' },
-        { name: 'Cheryl', image: cherylImage, groupColor: '#ff9a9e' },
+        { name: 'Cheryl', image: cherylImage, groupColor: '#24B247' },
     ];
 
     return (
