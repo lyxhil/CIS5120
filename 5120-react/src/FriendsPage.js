@@ -32,7 +32,7 @@ const initialGroup = {
     friends: initialChats,
 };
 
-const GroupsPage = () => {
+const GroupsPage = ({contacts}) => {
     const [groups, setGroups] = useState(initialGroup);
     const [selectedGroupId, setSelectedGroupId] = useState(initialGroup.id);
 

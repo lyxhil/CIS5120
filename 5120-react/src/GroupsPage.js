@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Frame from './Frame';
 import StatusBar from './StatusBar';
 import GroupsNavigationBar from './GroupsNavigationBar';
@@ -6,30 +6,28 @@ import SearchBar from './SearchBar';
 import ToggleButton from './ToggleButton';
 import GroupsContainer from './GroupsContainer';
 import GroupForm from './GroupForm';
-import groupSignifier from './GroupSignifier';
+import GroupSignifier from './GroupSignifier';
 
-const initialGroups = [
-    { id: 1, name: 'Friends', emoji: '🥰', backgroundColor: '#24B247', friends: [] },
-    { id: 2, name: 'Clubs', emoji: '🏊‍♀️', backgroundColor: '#42BDEB', friends: [] },
-    { id: 3, name: 'Classes', emoji: '📖', backgroundColor: '#FFB434', friends: [] },
-    { id: 4, name: 'Family', emoji: '👨‍👩‍👧', backgroundColor: '#A988FD', friends: [] },
-    { id: 5, name: 'Miscellaneous', emoji: '❓', backgroundColor: '#FFA0E7', friends: [] },
-    { id: 6, name: 'Do Not Respond', emoji: '❌', backgroundColor: '#FF7D88', friends: [] }
-];
-
-const GroupsPage = () => {
-    const [groups, setGroups] = useState(initialGroups);
+const GroupsPage = ({groups, contacts, editGroupFriends}) => {
+    const [groupsList, setGroups] = useState(groups);
     const [mode, setMode] = useState('view'); // 'view', 'delete', 'edit'
     const [selectedGroup, setSelectedGroup] = useState(null);
     const [selectedGroupId, setSelectedGroupId] = useState(null);
     const [isHomeActive, setIsHomeActive] = useState(false);
+    const [isContactsPage, setIsContactsPage] = useState(false);
+    const [forceRemount, setForceRemount] = useState(false); // New state for forcing remount
+
+    useEffect(() => {
+        console.log("isContactsPage:", isContactsPage);
+    }, [isContactsPage]);
+
 
     const handleAddGroup = () => {
         setSelectedGroup({ name: '', emoji: '', backgroundColor: '#cccccc' });
     };
 
     const handleDeleteGroup = (id) => {
-        setGroups(groups.filter(group => group.id !== id));
+        setGroups(groupsList.filter(group => group.id !== id));
     };
 
     const handleEditGroup = (group) => {
@@ -39,12 +37,12 @@ const GroupsPage = () => {
     const handleSubmitGroup = (group) => {
         if (group.id) {
             // Editing an existing group
-            const updatedGroups = groups.map(g => g.id === group.id ? group : g);
+            const updatedGroups = groupsList.map(g => g.id === group.id ? group : g);
             setGroups(updatedGroups);
         } else {
             // Adding a new group
             const newGroup = { ...group, id: Date.now() };
-            setGroups([...groups, newGroup]);
+            setGroups([...groupsList, newGroup]);
         }
         setSelectedGroup(null);
     };
@@ -65,25 +63,27 @@ const GroupsPage = () => {
         setSelectedGroupId(groupId);
     };
 
-    const handleBackToGroups = () => {
-        setSelectedGroupId(null);
-    };
     
     const handleToggleClick = (isHome) => {
         setIsHomeActive(isHome);
     }
 
     return (
-        <Frame>
+        <Frame style={{marginBottom: '300px'}}>
             <StatusBar />
-            <GroupsNavigationBar title={selectedGroupId ? groups.find(group => group.id === selectedGroupId).name : null} onBack={handleBackToGroups} />
+            {isContactsPage ? (<></>) : 
+            (
+            <>           
+            <GroupsNavigationBar title={selectedGroupId ? groupsList.find(group => group.id === selectedGroupId).name : null} />
             <div style={{ marginTop: '70px' }}>
                 <SearchBar />
             </div>
-            <ToggleButton isHomeActive={isHomeActive} onToggleClick={handleToggleClick} />
+            </> 
+            )}
+            {!selectedGroupId && <ToggleButton isHomeActive={isHomeActive} onToggleClick={handleToggleClick} />}
             {selectedGroupId ? (
                 <>
-                    {groupSignifier(groups.find(group => group.id === selectedGroupId))}
+                    {GroupSignifier(groupsList.find(group => group.id === selectedGroupId), setSelectedGroupId, contacts, isContactsPage, setIsContactsPage, editGroupFriends, forceRemount, setForceRemount)}
                     {/* <FriendsContainer
                         friends={groups.find(group => group.id === selectedGroupId).friends}
                         onAddFriend={(friend) => handleAddFriend(selectedGroupId, friend)}
@@ -94,7 +94,7 @@ const GroupsPage = () => {
             ) : (
                 <>
                     <GroupsContainer
-                        groups={groups}
+                        groups={groupsList}
                         mode={mode}
                         onDelete={handleDeleteGroup}
                         onEdit={handleEditGroup}

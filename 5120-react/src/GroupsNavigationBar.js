@@ -14,7 +14,6 @@ const GroupsNavigationBar = ({ title }) => {
                 <a href="/" style={{ textDecoration: 'none', color: 'blue', marginRight: '10px', fontSize: '18px' }}>
                     Edit
                 </a>
-                <span style={{ fontSize: '20px' }}>{title}</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center' }}>
                 <span style={{ textDecoration: 'none', color: 'black', marginRight: '140px', fontSize: '18px', fontWeight: 'bold' }}>

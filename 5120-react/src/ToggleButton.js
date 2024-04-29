@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ToggleButton = ({ isHomeActive, onToggleClick }) => {
     const homeLabelStyle = {
@@ -25,17 +26,28 @@ const ToggleButton = ({ isHomeActive, onToggleClick }) => {
         color: isHomeActive ? 'blue' : 'white'
     };
 
+    const contactsStyle = {
+        display: 'inline-block',
+        width: '120px',
+        height: '30px',
+        borderRadius: '15px',
+        textAlign: 'center',
+        lineHeight: '30px',
+        cursor: 'pointer',
+        backgroundColor: 'white' ,
+    };
+
     return (
         <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
             <input type="checkbox" id="toggle" style={{ display: 'none' }} />
             <label htmlFor="toggle" style={{ ...homeLabelStyle }} onClick={() => onToggleClick(true)}>
-                <a href="/" style={{ textDecoration: 'none', color: isHomeActive ? 'white' : 'blue' }}>Home</a>
+                <Link to="/" style={{ textDecoration: 'none', color: isHomeActive ? 'white' : 'blue' }}>Home</Link>
             </label>
             <label htmlFor="toggle" style={{ ...folderLabelStyle, marginLeft: '5px' }} onClick={() => onToggleClick(false)}>
-                <a href="/groups" style={{ textDecoration: 'none', color: isHomeActive ? 'blue' : 'white' }}>Folders</a>
+                <Link to="/groups" style={{ textDecoration: 'none', color: isHomeActive ? 'blue' : 'white' }}>Folders</Link>
             </label>
-            <label htmlFor="toggle" style={{ ...homeLabelStyle, marginLeft: '5px' }}>
-                <a href="/contacts" style={{ textDecoration: 'none', color: 'blue' }}>Contacts</a>
+            <label htmlFor="toggle" style={{ ...contactsStyle, marginLeft: '5px' }}>
+                <Link to="/contacts" style={{ textDecoration: 'none', color: 'blue' }}>Contacts</Link>
             </label>
         </div>
     );

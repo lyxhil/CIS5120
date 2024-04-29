@@ -10,7 +10,7 @@ const frameStyle = {
     position: 'relative',
     overflow: 'hidden',
     boxShadow: '0 0 20px rgba(0, 0, 0, 0.3)',
-    padding: '20px'
+    padding: '20px',
 };
 
 const Frame = ({ children }) => {

@@ -1,16 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Frame from './Frame';
 import StatusBar from './StatusBar';
 import SearchBar from './SearchBar';
 import Keyboard from './Keyboard';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
-const ContactsPage = ({contacts}) => {
+const AddGroupContactsPage = ({group, contacts, setIsContactsPage, editGroupFriends, setForceRemount}) => {
+    const [selectedContacts, setSelectedContacts] = useState([]);
     const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
+
+    const handleCheckboxChange = (contact) => {
+        if (selectedContacts.includes(contact)) {
+            setSelectedContacts(selectedContacts.filter((c) => c !== contact));
+        } else {
+            setSelectedContacts([...selectedContacts, contact]);
+        }
+    };
+    const navigate = useNavigate();
+
+    const handleDone = () => {
+        editGroupFriends(group.id, selectedContacts.map(contact => contact.name));
+        setIsContactsPage(false);
+        setForceRemount(prevState => !prevState);
+        navigate('/');
+    };
 
     const toggleKeyboard = () => {
         setIsKeyboardOpen(!isKeyboardOpen);
+    }
+    const closePage = () => {
+        setIsContactsPage(false);
     }
 
     const renderContacts = () => {
@@ -26,26 +47,37 @@ const ContactsPage = ({contacts}) => {
                     {groupHeader}
                     <div style={styles.contactRow}>
                         <span style={styles.contactName}>{contact.name}</span>
+                        <input 
+                            type="checkbox" 
+                            style={styles.checkbox} 
+                            checked={selectedContacts.includes(contact)}
+                            onChange={() => handleCheckboxChange(contact)}
+                        />
                     </div>
                 </React.Fragment>
             );
         });
     };
-    
+
+    const isDoneButtonVisible = selectedContacts.length > 0;
+
+    useEffect(() => {
+        // Pre-select friends already in the group
+        const selected = contacts.filter(contact => group.friends.includes(contact.name));
+        setSelectedContacts(selected);
+    }, [group, contacts]);
+
+
     return (
-        <Frame>
+        <>
             <StatusBar />
-            <div style={{ top: '10', left: '0', width: '100%', zIndex: '9998', display: 'flex',  alignItems: 'center', paddingTop: '25px', marginTop: '10px'}}>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <Link to="/" style={{ textDecoration: 'none', color: 'blue', fontSize: '18px' }}>
-                        Back
-                    </Link>
-                </div>
-                <div style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', textAlign: 'center'}}>
-                    <span style={{ textDecoration: 'none', color: 'black', fontSize: '18px', fontWeight: 'bold', marginRight: 'auto' }}>
-                        Contacts
-                    </span>
-                </div>
+            <div style={styles.topBar}>
+                <span style={styles.addTo}>Add to {group.name}</span>
+            </div>
+            <div style={styles.topBarRight}>
+                <button onClick={isDoneButtonVisible ? handleDone : closePage} style={styles.cancel}>
+                    {isDoneButtonVisible ? 'Done' : 'Cancel'}
+                </button>
             </div>
             <SearchBar style={styles.searchBar} onClick={toggleKeyboard} />
             <div style={styles.contactList}>
@@ -83,7 +115,7 @@ const ContactsPage = ({contacts}) => {
                 </ol>
             </div>
             {isKeyboardOpen && <Keyboard onKeyPress={(key) => console.log(key)} />}
-        </Frame>
+        </>
     );
 };
 
@@ -164,4 +196,4 @@ const styles = {
     },
 };
 
-export default ContactsPage;
+export default AddGroupContactsPage;

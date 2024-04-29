@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 import katieImage from './images/katie.png';
 import benImage from './images/ben.png';
 import mattImage from './images/matt.png';
@@ -37,7 +39,7 @@ const nameStyle = {
     margin: '1px'
 };
 
-const PinnedChats = () => {
+const PinnedChats = (contacts) => {
     const pinnedChats = [
         { name: 'Katie', image: katieImage, groupColor: '#24B247' },
         { name: 'Ben', image: benImage, groupColor: '#A988FD' },
@@ -49,22 +51,24 @@ const PinnedChats = () => {
         { name: 'Grace', image: graceImage, groupColor: '#ffb434' },
         { name: 'Cheryl', image: cherylImage, groupColor: '#24B247' },
     ];
-
+    const contactsArray = Object.values(contacts)[0].slice(0, 6);;
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             {[...Array(3)].map((_, rowIndex) => (
                 <React.Fragment key={rowIndex}>
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
-                        {pinnedChats.slice(rowIndex * 3, rowIndex * 3 + 3).map((chat, index) => (
-                            <div key={index} style={{ ...outerCircleStyle(chat.groupColor) }}>
-                                <div style={circleStyle}>
-                                    <img src={chat.image} alt={chat.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        {contactsArray.slice(rowIndex * 3, rowIndex * 3 + 3).map((chat, index) => (
+                            <Link key={index} to={`/messages/${chat.id}`}>
+                                <div key={index} style={{ ...outerCircleStyle(chat.groupColor) }}>
+                                    <div style={circleStyle}>
+                                        <img src={chat.image} alt={chat.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                    </div>
                                 </div>
-                            </div>
+                            </Link>
                         ))}
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
-                        {pinnedChats.slice(rowIndex * 3, rowIndex * 3 + 3).map((chat, index) => (
+                        {contactsArray.slice(rowIndex * 3, rowIndex * 3 + 3).map((chat, index) => (
                             <span key={index} style={{ ...nameStyle, margin: '10px' }}>{chat.name}</span>
                         ))}
                     </div>
