@@ -23,8 +23,8 @@ const GroupsContainer = ({ groups, mode, onDelete, onEdit, onGroupClick }) => {
                     {mode === 'delete' && (
                         <button onClick={(e) => { e.stopPropagation(); onDelete(group.id); }} style={{ position: 'absolute', top: 0, right: 0 }}>X</button>
                     )}
-                    <div style={{ fontSize: '50px' }}>{group.emoji}</div>
-                    <span>{group.name}</span>
+                    <div style={{ fontSize: '60px' }}>{group.emoji}</div>
+                    <span style={{ fontFamily: 'PT Sans, sans-serif', fontSize: '21px' }}>{group.name}</span>
                     {mode === 'edit' && (
                         <button onClick={(e) => { e.stopPropagation(); onEdit(group); }} style={{ position: 'absolute', bottom: 0, right: 0 }}>Edit</button>
                     )}

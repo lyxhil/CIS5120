@@ -3,7 +3,7 @@ import React from 'react';
 const frameStyle = {
     width: '414px',
     height: '896px',
-    backgroundColor: '#f2f2f2',
+    backgroundColor: '#ffffff',
     borderRadius: '50px',
     margin: 'auto',
     marginTop: '50px',

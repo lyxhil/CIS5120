@@ -10,7 +10,7 @@ const ToggleButton = ({ isHomeActive, onToggleClick }) => {
         textAlign: 'center',
         lineHeight: '30px',
         cursor: 'pointer',
-        backgroundColor: isHomeActive ? 'blue' : 'white',
+        backgroundColor: isHomeActive ? 'blue' : '#f2f2f2',
         color: isHomeActive ? 'white' : 'blue'
     };
 
@@ -22,8 +22,8 @@ const ToggleButton = ({ isHomeActive, onToggleClick }) => {
         textAlign: 'center',
         lineHeight: '30px',
         cursor: 'pointer',
-        backgroundColor: isHomeActive ? 'white' : 'blue',
-        color: isHomeActive ? 'blue' : 'white'
+        backgroundColor: isHomeActive ? '#f2f2f2' : 'blue',
+        color: isHomeActive ? 'blue' : '#f2f2f2'
     };
 
     const contactsStyle = {
@@ -34,7 +34,7 @@ const ToggleButton = ({ isHomeActive, onToggleClick }) => {
         textAlign: 'center',
         lineHeight: '30px',
         cursor: 'pointer',
-        backgroundColor: 'white' ,
+        backgroundColor: '#f2f2f2' ,
     };
 
     return (
