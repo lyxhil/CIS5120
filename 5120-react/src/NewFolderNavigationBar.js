@@ -18,7 +18,7 @@ const NewFolderNavigationBar = ({ title }) => {
             </div>
             <div style={{ position: 'absolute', left: '45%', transform: 'translateX(-50%)', textAlign: 'center'}}>
                 <span style={{ textDecoration: 'none', color: 'black', fontSize: '18px', fontWeight: 'bold', marginRight: 'auto' }}>
-                    New Message Group
+                    New Chat Folder
                 </span>
             </div>
         </div>

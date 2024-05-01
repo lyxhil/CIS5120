@@ -1,6 +1,8 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import StatusBar from './StatusBar';
+import microphoneIcon from './images/microphone-icon.png';
+// import addIcon from './images/add.png';
+// import facetimeIcon from './images/facetime.png';
 
 const outerCircleStyle = (groupColor) => ({
   width: '55px',
@@ -13,6 +15,17 @@ const outerCircleStyle = (groupColor) => ({
   marginLeft: 'auto',
   marginRight: 'auto',
 });
+
+const messageBarStyle = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  marginTop: '475px',
+  backgroundColor: '#E2E7EB',
+  borderRadius: '10px',
+  padding: '1px',
+  width: '370px',
+};
 
 const ContactMessagesPage = ({ contacts }) => {
   const { contactId } = useParams();
@@ -45,6 +58,23 @@ const ContactMessagesPage = ({ contacts }) => {
             <p style={styles.messageText}>{message.message}</p>
           </div>
         ))}
+      </div>
+      {/* <div style={addButtonStyle}>
+          <button style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '5px' }}>
+              <img src={addIcon} alt="Add" style={{ width: '20px', height: '20px' }} />
+          </button>
+      </div> */}
+      <div style={messageBarStyle}>
+          <input type="text" placeholder="iMessage" style={{
+              flex: '1',
+              border: 'none',
+              background: 'none',
+              outline: 'none',
+              padding: '2px',
+          }} />
+          <button style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '5px' }}>
+              <img src={microphoneIcon} alt="Microphone" style={{ width: '20px', height: '20px' }} />
+          </button>
       </div>
     </div>
     </div>

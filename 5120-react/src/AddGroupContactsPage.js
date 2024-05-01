@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Frame from './Frame';
-import StatusBar from './StatusBar';
 import SearchBar from './SearchBar';
 import Keyboard from './Keyboard';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -75,7 +74,6 @@ const AddGroupContactsPage = ({groups, contacts, editGroupFriends, editGroupList
     return (
         <>
             <Frame style={{marginBottom: '300px'}}>
-            <StatusBar />
             <div style={styles.topBar}>
                 <span style={styles.addTo}>Add to {group.name}</span>
             </div>
