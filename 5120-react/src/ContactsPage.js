@@ -15,7 +15,10 @@ const ContactsPage = ({contacts}) => {
 
     const renderContacts = () => {
         let currentGroup = '';
-        return contacts.map((contact, index) => {
+        // Sort contacts alphabetically by name
+        const sortedContacts = contacts.sort((a, b) => a.name.localeCompare(b.name));
+    
+        return sortedContacts.map((contact, index) => {
             let groupHeader = null;
             if (contact.group !== currentGroup) {
                 currentGroup = contact.group;
@@ -31,6 +34,7 @@ const ContactsPage = ({contacts}) => {
             );
         });
     };
+    
     
     return (
         <Frame>

@@ -13,6 +13,12 @@ import mrsSmithImage from './images/mrssmith.png';
 import mrDrewImage from './images/mrdrew.png';
 import angelinaImage from './images/angelina.png';
 import donaldImage from './images/donald.png';
+import mattImage from './images/matt.png';
+import katieImage from './images/katie.png';
+import grandpaImage from './images/grandpa.png';
+import graceImage from './images/grace.png';
+import cherylImage from './images/cheryl.png';
+import catherineImage from './images/catherine.png';
 
 const App = () => {
     const initialGroups = [
@@ -99,14 +105,74 @@ const App = () => {
             id: 7,
             name: 'Alice',
             group: 'A',
-            image: mrsSmithImage,
+            image: katieImage,
             messages: [
                 { name: 'Alice', message: "Hey, I'm Alice! Did you know that flamingos can only eat when their heads are upside down?" },
                 { name: 'Alice', message: "Isn't nature fascinating? 🦩" },
                 { name: 'user', message: "Alice, nature is indeed fascinating! I never knew that about flamingos!" }
             ]
+        },
+        {
+            id: 8,
+            name: 'Ben',
+            group: 'B',
+            image: grandpaImage,
+            messages: [
+                { name: 'Ben', message: "Hey Ben here! Ever tried bungee jumping?" },
+                { name: 'user', message: "No, but it sounds exhilarating! Have you done it before?" },
+                { name: 'Ben', message: "I have, and it’s a total thrill! We should go together sometime! 🌉" },
+                { name: 'user', message: "That sounds like a blast, Ben! Let's plan it soon." }
+            ]
+        },
+        {
+            id: 9,
+            name: 'Chloe',
+            group: 'C',
+            image: graceImage,
+            messages: [
+                { name: 'Chloe', message: "Good morning! Chloe here, ready to start the day?" },
+                { name: 'Chloe', message: "I’m thinking about going for a jog, you in? 🏃‍♀️" },
+                { name: 'user', message: "Absolutely, Chloe! Exercise is a great way to start the day." },
+                { name: 'Chloe', message: "Awesome, let’s meet at the park in 30 minutes! 🌳" }
+            ]
+        },
+        {
+            id: 10,
+            name: 'Daniel',
+            group: 'D',
+            image: mattImage,
+            messages: [
+                { name: 'Daniel', message: "Daniel here! Fancy a game of chess?" },
+                { name: 'user', message: "I'd love to, Daniel! When are you free?" },
+                { name: 'Daniel', message: "How about this Saturday? 🕰️" },
+                { name: 'user', message: "Perfect! I'll bring my chess set." },
+                { name: 'Daniel', message: "Great! See you then." }
+            ]
+        },
+        {
+            id: 11,
+            name: 'Eva',
+            group: 'E',
+            image: cherylImage,
+            messages: [
+                { name: 'Eva', message: "Hi Eva here! Did you know Venus spins backwards?" },
+                { name: 'user', message: "That's quite interesting, Eva! Any more space facts?" },
+                { name: 'Eva', message: "Absolutely, did you know that a day on Venus is longer than a year on Venus?" }
+            ]
+        },
+        {
+            id: 12,
+            name: 'Catherine',
+            group: 'C',
+            image: catherineImage,
+            messages: [
+                { name: 'Catherine', message: "Hey it's Catherine! Ready to talk about the mysteries of the ocean?" },
+                { name: 'user', message: "Definitely! What do you have for me today?" },
+                { name: 'Catherine', message: "Did you know that more than 80% of the ocean is unexplored and unmapped?" },
+                { name: 'user', message: "That’s fascinating, Catherine! Tell me more." },
+                { name: 'Catherine', message: "Sure, most of the life in the ocean is found in the twilight zone where sunlight barely reaches." }
+            ]
         }
-        // Add more contacts as needed
     ];
         
     const [groups, setGroups] = useState([...initialGroups]); // Initial groups state

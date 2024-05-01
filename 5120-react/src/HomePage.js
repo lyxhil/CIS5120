@@ -28,17 +28,19 @@ const HomePage = ({contacts}) => {
                 <SearchBar onClick={toggleKeyboard} />
                 <ToggleButton isHomeActive={isHomeActive} onToggleClick={handleToggleClick} />
                 <PinnedChats contacts={contacts}/>
-                <ChatList friends={contacts} showDeleteButton={false} renderItem={(friend) => (
-                    // <Link to={friend.route} style={{ textDecoration: 'none', color: 'inherit' }}>
+                <ChatList 
+                    friends={contacts.slice(-6)} // This slices the array to include only the last 6 elements
+                    showDeleteButton={false}
+                    renderItem={(friend) => (
                         <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
                             <img src={friend.image} alt={friend.name} />
                             <div style={{ marginLeft: '10px'}}>
-                                <h3>{friend.messages[-1].message}</h3>
+                                <h3>{friend.messages[friend.messages.length - 1].message}</h3> {/* Fixed index access */}
                                 <p>{friend.name}</p>
                             </div>
                         </div>
-                    // </Link>
-                )}/>
+                    )}
+                />
             </div>
             {isKeyboardOpen && <Keyboard onKeyPress={(key) => console.log(key)} />}
         </Frame>
