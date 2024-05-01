@@ -7,6 +7,7 @@ import FriendsPage from './FriendsPage';
 import BrandonPage from './BrandonPage';
 import NewFolderPage from './NewFolderPage';
 import ContactMessagesPage from './ContactMessagesPage';
+import AddGroupContactsPage from './AddGroupContactsPage';
 
 import brandonImage from './images/brandon.png';
 import mrsSmithImage from './images/mrssmith.png';
@@ -19,6 +20,7 @@ import grandpaImage from './images/grandpa.png';
 import graceImage from './images/grace.png';
 import cherylImage from './images/cheryl.png';
 import catherineImage from './images/catherine.png';
+import GroupSignifier from './GroupSignifier';
 
 const App = () => {
     const initialGroups = [
@@ -35,6 +37,7 @@ const App = () => {
             id: 1,
             name: 'Alex',
             group: 'A',
+            groupList: ['Friends'],
             image: brandonImage,
             messages: [
                 { name: 'Alex', message: "Hey there! Just wanted to say hi 😊" },
@@ -46,6 +49,7 @@ const App = () => {
             id: 2,
             name: 'John',
             group: 'J',
+            groupList: ['Friends'],
             image: mrDrewImage,
             messages: [
                 { name: 'John', message: "Hey, it's John here! Ready for some fun facts?" },
@@ -59,6 +63,7 @@ const App = () => {
             id: 3,
             name: 'Emily',
             group: 'E',
+            groupList: [],
             image: mrsSmithImage,
             messages: [
                 { name: 'Emily', message: "Hi there! How's your day going? 😊" },
@@ -71,6 +76,7 @@ const App = () => {
             id: 4,
             name: 'Michael',
             group: 'M',
+            groupList: [],
             image: donaldImage,
             messages: [
                 { name: 'Michael', message: "Hello, it's Michael! Ready for an adventure?" },
@@ -83,6 +89,7 @@ const App = () => {
             id: 5,
             name: 'Sarah',
             group: 'S',
+            groupList: [],
             image: angelinaImage,
             messages: [
                 { name: 'Sarah', message: "Hi, I'm Sarah! Did you know that the Earth is smoother than a billiard ball?" },
@@ -94,6 +101,7 @@ const App = () => {
             id: 6,
             name: 'David',
             group: 'D',
+            groupList: ['Classes'],
             image: brandonImage,
             messages: [
                 { name: 'David', message: "Hello there, it's David! Have you ever tried skydiving?" },
@@ -105,6 +113,7 @@ const App = () => {
             id: 7,
             name: 'Alice',
             group: 'A',
+            groupList: ['Friends'],
             image: katieImage,
             messages: [
                 { name: 'Alice', message: "Hey, I'm Alice! Did you know that flamingos can only eat when their heads are upside down?" },
@@ -116,6 +125,7 @@ const App = () => {
             id: 8,
             name: 'Ben',
             group: 'B',
+            groupList: [],
             image: grandpaImage,
             messages: [
                 { name: 'Ben', message: "Hey Ben here! Ever tried bungee jumping?" },
@@ -128,6 +138,7 @@ const App = () => {
             id: 9,
             name: 'Chloe',
             group: 'C',
+            groupList: [],
             image: graceImage,
             messages: [
                 { name: 'Chloe', message: "Good morning! Chloe here, ready to start the day?" },
@@ -140,6 +151,7 @@ const App = () => {
             id: 10,
             name: 'Daniel',
             group: 'D',
+            groupList: [],
             image: mattImage,
             messages: [
                 { name: 'Daniel', message: "Daniel here! Fancy a game of chess?" },
@@ -153,6 +165,7 @@ const App = () => {
             id: 11,
             name: 'Eva',
             group: 'E',
+            groupList: [],
             image: cherylImage,
             messages: [
                 { name: 'Eva', message: "Hi Eva here! Did you know Venus spins backwards?" },
@@ -164,6 +177,7 @@ const App = () => {
             id: 12,
             name: 'Catherine',
             group: 'C',
+            groupList: [],
             image: catherineImage,
             messages: [
                 { name: 'Catherine', message: "Hey it's Catherine! Ready to talk about the mysteries of the ocean?" },
@@ -183,6 +197,13 @@ const App = () => {
       setGroups([...groups, newGroup]);
     };
 
+    const deleteGroup = (groupId) => {
+        // Filter out the group with the specified ID
+        const updatedGroups = groups.filter(group => group.id !== parseInt(groupId));
+        // Update the groups state with the filtered array
+        setGroups(updatedGroups);
+    };
+    
     const editGroupFriends = (groupId, updatedFriends) => {
         setGroups(groups.map(group => {
             if (group.id === groupId) {
@@ -191,12 +212,45 @@ const App = () => {
             return group;
         }));
     };
+
+    const editGroupList = (contactId, group, isSelected) => {
+        setContacts(prevContacts => {
+            return prevContacts.map(contact => {
+                if (contact.id === contactId) {
+                    if (isSelected) {
+                        // If isSelected is true, add the group to groupList if it's not already present
+                        if (!contact.groupList.includes(group)) {
+                            return {
+                                ...contact,
+                                groupList: [...contact.groupList, group]
+                            };
+                        }
+                    } else {
+                        // If isSelected is false, remove the group from groupList if it exists
+                        const indexToRemove = contact.groupList.indexOf(group);
+                        if (indexToRemove !== -1) {
+                            const newGroupList = [...contact.groupList];
+                            newGroupList.splice(indexToRemove, 1);
+                            return {
+                                ...contact,
+                                groupList: newGroupList
+                            };
+                        }
+                    }
+                }
+                return contact;
+            });
+        });
+    };
+      
   
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<HomePage contacts={contacts}/>} />
+                <Route path="/" element={<HomePage groups={groups} contacts={contacts}/>} />
                 <Route path="/groups" element={<GroupsPage groups={groups} contacts={contacts} editGroupFriends={editGroupFriends}/>} />
+                <Route path="/groups/:groupId" element={<GroupSignifier groups={groups} contacts={contacts} deleteGroup={deleteGroup} setContacts={setContacts}/>} />
+                <Route path="/groupsContacts/:groupId" element={<AddGroupContactsPage groups={groups} contacts={contacts} editGroupFriends={editGroupFriends} editGroupList={editGroupList}/>} />
                 <Route path="/contacts" element={<ContactsPage contacts={contacts}/>} />
                 <Route path="/friends-page" element={<FriendsPage contacts={contacts}/>} />
                 <Route path="/brandon-page" element={<BrandonPage />} />

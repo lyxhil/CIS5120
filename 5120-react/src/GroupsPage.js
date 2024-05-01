@@ -7,6 +7,7 @@ import ToggleButton from './ToggleButton';
 import GroupsContainer from './GroupsContainer';
 import GroupForm from './GroupForm';
 import GroupSignifier from './GroupSignifier';
+import { useNavigate } from 'react-router-dom';
 
 const GroupsPage = ({groups, contacts, editGroupFriends}) => {
     const [groupsList, setGroups] = useState(groups);
@@ -16,6 +17,7 @@ const GroupsPage = ({groups, contacts, editGroupFriends}) => {
     const [isHomeActive, setIsHomeActive] = useState(false);
     const [isContactsPage, setIsContactsPage] = useState(false);
     const [forceRemount, setForceRemount] = useState(false); // New state for forcing remount
+    const navigate = useNavigate();
 
     useEffect(() => {
         console.log("isContactsPage:", isContactsPage);
@@ -60,7 +62,8 @@ const GroupsPage = ({groups, contacts, editGroupFriends}) => {
     };
 
     const handleGroupClick = (groupId) => {
-        setSelectedGroupId(groupId);
+        // setSelectedGroupId(groupId);
+        navigate(`${groupId}`);
     };
 
     
@@ -83,13 +86,7 @@ const GroupsPage = ({groups, contacts, editGroupFriends}) => {
             {!selectedGroupId && <ToggleButton isHomeActive={isHomeActive} onToggleClick={handleToggleClick} />}
             {selectedGroupId ? (
                 <>
-                    {GroupSignifier(groupsList.find(group => group.id === selectedGroupId), setSelectedGroupId, contacts, isContactsPage, setIsContactsPage, editGroupFriends, forceRemount, setForceRemount)}
-                    {/* <FriendsContainer
-                        friends={groups.find(group => group.id === selectedGroupId).friends}
-                        onAddFriend={(friend) => handleAddFriend(selectedGroupId, friend)}
-                        onDeleteFriend={(friendId) => handleDeleteFriend(selectedGroupId, friendId)}
-                        showDeleteButton={false}
-                    /> */}
+                    {GroupSignifier(groupsList.find(group => group.id === selectedGroupId), setSelectedGroupId, contacts)}
                 </>
             ) : (
                 <>

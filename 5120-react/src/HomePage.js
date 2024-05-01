@@ -9,7 +9,7 @@ import ChatList from './ChatList';
 import { Link } from 'react-router-dom';
 import Keyboard from './Keyboard';
 
-const HomePage = ({contacts}) => {
+const HomePage = ({groups, contacts}) => {
     const [isHomeActive, setIsHomeActive] = useState(true);
     const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
 
@@ -27,8 +27,9 @@ const HomePage = ({contacts}) => {
             <div style={{ marginTop: '70px' }}> 
                 <SearchBar onClick={toggleKeyboard} />
                 <ToggleButton isHomeActive={isHomeActive} onToggleClick={handleToggleClick} />
-                <PinnedChats contacts={contacts}/>
+                <PinnedChats contacts={contacts} groups={groups}/>
                 <ChatList 
+                    groups={groups}
                     friends={contacts.slice(-6)} // This slices the array to include only the last 6 elements
                     showDeleteButton={false}
                     renderItem={(friend) => (

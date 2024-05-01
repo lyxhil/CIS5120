@@ -1,46 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Frame from './Frame';
 import StatusBar from './StatusBar';
 import SearchBar from './SearchBar';
 import Keyboard from './Keyboard';
-import { useParams, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
-const AddGroupContactsPage = ({groups, contacts, editGroupFriends, editGroupList}) => {
-    const { groupId } = useParams();
-    const group = groups.find(group => group.id === parseInt(groupId));
-    const navigate = useNavigate();
-
-    const [selectedContacts, setSelectedContacts] = useState([]);
+const ContactsPage = ({contacts}) => {
     const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
-
-    const handleCheckboxChange = (contact) => {
-        if (selectedContacts.includes(contact)) {
-            setSelectedContacts(selectedContacts.filter((c) => c !== contact));
-        } else {
-            setSelectedContacts([...selectedContacts, contact]);
-        }
-    };
-
-    const handleDone = () => {
-        editGroupFriends(group.id, selectedContacts.map(contact => contact.name));
-        contacts.forEach(contact => {
-            const isSelected = selectedContacts.includes(contact);
-            editGroupList(contact.id, group.name, isSelected);
-        });
-        navigate(`/groups/${group.id}`);
-    };
 
     const toggleKeyboard = () => {
         setIsKeyboardOpen(!isKeyboardOpen);
     }
-    const closePage = () => {
-        
-    }
 
     const renderContacts = () => {
         let currentGroup = '';
-        return contacts.map((contact, index) => {
+        // Sort contacts alphabetically by name
+        const sortedContacts = contacts.sort((a, b) => a.name.localeCompare(b.name));
+    
+        return sortedContacts.map((contact, index) => {
             let groupHeader = null;
             if (contact.group !== currentGroup) {
                 currentGroup = contact.group;
@@ -51,38 +29,27 @@ const AddGroupContactsPage = ({groups, contacts, editGroupFriends, editGroupList
                     {groupHeader}
                     <div style={styles.contactRow}>
                         <span style={styles.contactName}>{contact.name}</span>
-                        <input 
-                            type="checkbox" 
-                            style={styles.checkbox} 
-                            checked={selectedContacts.includes(contact)}
-                            onChange={() => handleCheckboxChange(contact)}
-                        />
                     </div>
                 </React.Fragment>
             );
         });
     };
-
-    const isDoneButtonVisible = selectedContacts.length > 0;
-
-    useEffect(() => {
-        // Pre-select friends already in the group
-        const selected = contacts.filter(contact => group.friends.includes(contact.name));
-        setSelectedContacts(selected);
-    }, [group, contacts]);
-
-
+    
+    
     return (
-        <>
-            <Frame style={{marginBottom: '300px'}}>
+        <Frame>
             <StatusBar />
-            <div style={styles.topBar}>
-                <span style={styles.addTo}>Add to {group.name}</span>
-            </div>
-            <div style={styles.topBarRight}>
-                <button onClick={isDoneButtonVisible ? handleDone : closePage} style={styles.cancel}>
-                    {isDoneButtonVisible ? 'Done' : 'Cancel'}
-                </button>
+            <div style={{ top: '10', left: '0', width: '100%', zIndex: '9998', display: 'flex',  alignItems: 'center', paddingTop: '25px', marginTop: '10px'}}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <Link to="/" style={{ textDecoration: 'none', color: 'blue', fontSize: '18px' }}>
+                        Back
+                    </Link>
+                </div>
+                <div style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', textAlign: 'center'}}>
+                    <span style={{ textDecoration: 'none', color: 'black', fontSize: '18px', fontWeight: 'bold', marginRight: 'auto' }}>
+                        Contacts
+                    </span>
+                </div>
             </div>
             <SearchBar style={styles.searchBar} onClick={toggleKeyboard} />
             <div style={styles.contactList}>
@@ -120,8 +87,7 @@ const AddGroupContactsPage = ({groups, contacts, editGroupFriends, editGroupList
                 </ol>
             </div>
             {isKeyboardOpen && <Keyboard onKeyPress={(key) => console.log(key)} />}
-            </Frame>
-        </>
+        </Frame>
     );
 };
 
@@ -202,4 +168,4 @@ const styles = {
     },
 };
 
-export default AddGroupContactsPage;
+export default ContactsPage;

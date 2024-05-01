@@ -14,7 +14,7 @@ import cherylImage from './images/cheryl.png';
 const circleStyle = {
     width: '110px',
     height: '110px',
-    borderRadius: '40%',
+    borderRadius: '50%',
     overflow: 'hidden',
     display: 'flex',
     alignItems: 'center',
@@ -39,7 +39,7 @@ const nameStyle = {
     margin: '1px'
 };
 
-const PinnedChats = (contacts) => {
+const PinnedChats = ({contacts, groups}) => {
     const pinnedChats = [
         { name: 'Katie', image: katieImage, groupColor: '#24B247' },
         { name: 'Ben', image: benImage, groupColor: '#A988FD' },
@@ -51,7 +51,18 @@ const PinnedChats = (contacts) => {
         { name: 'Grace', image: graceImage, groupColor: '#ffb434' },
         { name: 'Cheryl', image: cherylImage, groupColor: '#24B247' },
     ];
-    const contactsArray = Object.values(contacts)[0].slice(0, 6);;
+    const contactsArray = Object.values(contacts).slice(0, 6);
+    const getFirstGroupColor = (contact) => {
+        if (contact.groupList.length === 0) {
+            return '#F3F3F3'; 
+        }
+    
+        const firstGroup = contact.groupList[0];
+        const firstGroupObject = groups.find(group => group.name === firstGroup);
+    
+        return firstGroupObject.backgroundColor;
+    };
+
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             {[...Array(3)].map((_, rowIndex) => (
@@ -59,7 +70,7 @@ const PinnedChats = (contacts) => {
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
                         {contactsArray.slice(rowIndex * 3, rowIndex * 3 + 3).map((chat, index) => (
                             <Link key={index} to={`/messages/${chat.id}`}>
-                                <div key={index} style={{ ...outerCircleStyle(chat.groupColor) }}>
+                                <div key={index} style={{ ...outerCircleStyle(getFirstGroupColor(chat)) }}>
                                     <div style={circleStyle}>
                                         <img src={chat.image} alt={chat.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                     </div>

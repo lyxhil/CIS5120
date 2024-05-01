@@ -19,13 +19,24 @@ const outerCircleStyle = (groupColor) => ({
     marginRight: '10px',
 });
 
-const ChatList = ({ friends, showDeleteButton, onDeleteFriend }) => {
+const ChatList = ({ friends, groups, showDeleteButton, onDeleteFriend }) => {
+    const getFirstGroupColor = (contact) => {
+        if (contact.groupList.length === 0) {
+            return '#F3F3F3'; 
+        }
+    
+        const firstGroup = contact.groupList[0];
+        const firstGroupObject = groups.find(group => group.name === firstGroup);
+    
+        return firstGroupObject.backgroundColor;
+    };
+    
     return (
         <div>
             {friends.map((friend, index) => (
             <Link key={index} to={`/messages/${friend.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div key={index} style={chatStyle}>
-                    <div style={outerCircleStyle(friend.groupColor)}>
+                    <div style={outerCircleStyle(getFirstGroupColor(friend))}>
                         <div style={{ width: '45px', height: '45px', borderRadius: '50%', overflow: 'hidden' }}>
                             <img src={friend.image} alt={friend.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                         </div>
