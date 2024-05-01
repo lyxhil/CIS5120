@@ -39,7 +39,10 @@ const AddGroupContactsPage = ({groups, contacts, editGroupFriends, editGroupList
 
     const renderContacts = () => {
         let currentGroup = '';
-        return contacts.map((contact, index) => {
+        // Sort the contacts array alphabetically by name before mapping over it
+        const sortedContacts = contacts.sort((a, b) => a.name.localeCompare(b.name));
+        
+        return sortedContacts.map((contact, index) => {
             let groupHeader = null;
             if (contact.group !== currentGroup) {
                 currentGroup = contact.group;
@@ -52,7 +55,18 @@ const AddGroupContactsPage = ({groups, contacts, editGroupFriends, editGroupList
                         <span style={styles.contactName}>{contact.name}</span>
                         <input 
                             type="checkbox" 
-                            style={styles.checkbox} 
+                            style={{
+                                cursor: 'pointer',
+                                marginRight: '10px',
+                                width: '20px',
+                                height: '20px',
+                                border: '2px solid #007aff',
+                                borderRadius: '50%',
+                                backgroundColor: selectedContacts.includes(contact) ? '#007aff' : 'transparent',
+                                appearance: 'none',
+                                outline: 'none',
+                                WebkitAppearance: 'none'
+                            }}
                             checked={selectedContacts.includes(contact)}
                             onChange={() => handleCheckboxChange(contact)}
                         />
@@ -61,6 +75,7 @@ const AddGroupContactsPage = ({groups, contacts, editGroupFriends, editGroupList
             );
         });
     };
+    
 
     const isDoneButtonVisible = selectedContacts.length > 0;
 
@@ -138,10 +153,15 @@ const styles = {
         right: '10px',
     },
     cancel: {
-        textDecoration: 'none',
-        color: 'blue',
-        fontSize: '18px'
-    },
+        padding: '8px 16px',
+        backgroundColor: 'transparent', // Clear background
+        color: '#007aff',
+        border: 'none',
+        borderRadius: '4px',
+        cursor: 'pointer',
+        fontSize: '17px',
+        fontWeight: '400' // Normal weight per Apple's UI guidelines
+    }, 
     searchBar: {
         marginTop: '0px', 
     },
@@ -165,7 +185,20 @@ const styles = {
         color: '#000',
     },
     checkbox: {
-        marginLeft: '10px',
+        cursor: 'pointer',
+        marginRight: '10px',
+        width: '20px',
+        height: '20px',
+        border: '2px solid #007aff', // Blue border
+        borderRadius: '50%', // Fully rounded
+        backgroundColor: 'transparent', // Clear background initially
+        appearance: 'none', // Removes default styling
+        outline: 'none', // Removes focus border
+        WebkitAppearance: 'none', // Specific for iOS and Safari
+        ':checked': {
+            backgroundColor: '#007aff', // Blue background when checked
+            borderColor: '#007aff' // Ensures the border color remains the same when checked
+        }
     },
     alphabetBar: {
         position: 'absolute',
