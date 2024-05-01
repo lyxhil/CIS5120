@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Frame from './Frame';
-import StatusBar from './StatusBar';
 import NavigationBar from './NavigationBar';
 import SearchBar from './SearchBar';
 import ToggleButton from './ToggleButton';
@@ -22,7 +21,6 @@ const HomePage = ({groups, contacts}) => {
     }
     return (
         <Frame>
-            <StatusBar />
             <NavigationBar />
             <div style={{ marginTop: '70px' }}> 
                 <SearchBar onClick={toggleKeyboard} />

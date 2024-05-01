@@ -73,7 +73,6 @@ const GroupsPage = ({groups, contacts, editGroupFriends}) => {
 
     return (
         <Frame style={{marginBottom: '300px'}}>
-            <StatusBar />
             {isContactsPage ? (<></>) : 
             (
             <>           

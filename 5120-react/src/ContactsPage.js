@@ -38,7 +38,6 @@ const ContactsPage = ({contacts}) => {
     
     return (
         <Frame>
-            <StatusBar />
             <div style={{ top: '10', left: '0', width: '100%', zIndex: '9998', display: 'flex',  alignItems: 'center', paddingTop: '25px', marginTop: '10px'}}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Link to="/" style={{ textDecoration: 'none', color: 'blue', fontSize: '18px' }}>

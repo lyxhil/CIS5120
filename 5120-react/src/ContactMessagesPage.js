@@ -21,7 +21,6 @@ const ContactMessagesPage = ({ contacts }) => {
   const contact = contacts.find(contact => contact.id === parseInt(contactId));
   return (
     <div style={styles.frameStyle}>
-    <StatusBar />
     
     <div style={styles.container}>
       <div style={styles.contactDetails}>

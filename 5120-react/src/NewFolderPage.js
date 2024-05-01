@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Frame from './Frame'; 
-import StatusBar from './StatusBar';
 import NewFolderNavBar from './NewFolderNavigationBar';
 import { useNavigate } from 'react-router-dom';
 
@@ -44,7 +43,6 @@ const NewFolderPage  = ({ addGroup, groups }) => {
 
   return (
     <Frame>
-        <StatusBar />
         <NewFolderNavBar />
         <div style={{ textAlign: 'center' , marginTop: '30%'}}>
           <button onClick={handleModalToggle} style={{ margin: '20px', fontSize: '18px' }}>Add Emoji</button>

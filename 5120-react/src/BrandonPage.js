@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import Frame from './Frame';
-import StatusBar from './StatusBar';
 
 // Chat message component to display individual messages
 const ChatMessage = ({ message, isSender }) => {
   return (
     <Frame>
-            <StatusBar />
     <div style={{ textAlign: isSender ? 'right' : 'left', margin: '5px' }}>
       <div style={{ backgroundColor: isSender ? '#DCF8C6' : '#E5E5EA', padding: '10px', borderRadius: '10px', display: 'inline-block' }}>
         {message}

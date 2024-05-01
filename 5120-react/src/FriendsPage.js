@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Frame from './Frame';
-import StatusBar from './StatusBar';
 import FriendsNavigationBar from './FriendsNavigationBar';
 import SearchBar from './SearchBar';
 import ToggleButton from './ToggleButton';
@@ -77,7 +76,6 @@ const FriendsPage = ({ groups, selectedGroupId, handleBackToGroups, handleAddFri
 
     return (
         <Frame>
-            <StatusBar />
             <FriendsNavigationBar title={selectedGroup.name} onBack={handleBackToGroups} />
             <div style={{ marginTop: '100px' }}>
                 <SearchBar />
