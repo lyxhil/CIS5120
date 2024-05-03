@@ -1,8 +1,8 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import microphoneIcon from './images/microphone-icon.png';
-// import addIcon from './images/add.png';
-// import facetimeIcon from './images/facetime.png';
+import addIcon from './images/add.png';
+import facetimeIcon from './images/facetime.png';
 
 const outerCircleStyle = (groupColor) => ({
   width: '55px',
@@ -19,8 +19,8 @@ const outerCircleStyle = (groupColor) => ({
 const messageBarStyle = {
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'space-between',
-  marginTop: '475px',
+  justifyContent: 'flex-start',
+  marginTop: '460px',
   backgroundColor: '#E2E7EB',
   borderRadius: '10px',
   padding: '1px',
@@ -34,7 +34,6 @@ const ContactMessagesPage = ({ contacts }) => {
   const contact = contacts.find(contact => contact.id === parseInt(contactId));
   return (
     <div style={styles.frameStyle}>
-    
     <div style={styles.container}>
       <div style={styles.contactDetails}>
         <Link style={styles.back} to='/'>{'<'}</Link>
@@ -48,6 +47,7 @@ const ContactMessagesPage = ({ contacts }) => {
           </div>
           <h1 style={styles.header}>{contact.name}</h1>
         </div>
+        <img src={facetimeIcon} alt="Facetime" style={styles.facetimeIcon} />
       </div>
       <div style={styles.messageContainer}>
         {contact.messages.map((message, index) => (
@@ -59,12 +59,8 @@ const ContactMessagesPage = ({ contacts }) => {
           </div>
         ))}
       </div>
-      {/* <div style={addButtonStyle}>
-          <button style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '5px' }}>
-              <img src={addIcon} alt="Add" style={{ width: '20px', height: '20px' }} />
-          </button>
-      </div> */}
       <div style={messageBarStyle}>
+        <img src={addIcon} alt="Add" style ={{ width: '40px', height: '40px', margin:'0px'}} />
           <input type="text" placeholder="iMessage" style={{
               flex: '1',
               border: 'none',
@@ -84,11 +80,11 @@ const ContactMessagesPage = ({ contacts }) => {
 const styles = {
   frameStyle: {
     width: '454px',
-    height: '936px',
+    height: '900px',
     backgroundColor: '#ffffff',
     borderRadius: '50px',
     margin: 'auto',
-    marginTop: '50px',
+    marginTop: '40px',
     position: 'relative',
     overflow: 'hidden',
     boxShadow: '0 0 20px rgba(0, 0, 0, 0.3)',
@@ -106,18 +102,22 @@ const styles = {
     color: '#218aff',
   },
   contactDetails: {
-    paddingTop: '50px',
-    paddingLeft:'20px',
+    paddingTop: '30px',
+    paddingLeft:'28px',
     width: '100%',
     backgroundColor: '#f2f2f2',
     display: 'grid',
-    gridTemplateColumns: '170px 70px', // Two columns: auto for contact info, 30px for the back link
+    gridTemplateColumns: '170px 70px 180px', // Two columns: auto for contact info, 30px for the back link
     alignItems: 'center',
     borderBottom: '1px solid #ccc',
   },
+  facetimeIcon: {
+    justifySelf: 'end',
+    height: '35px',
+  },
   header: {
     fontSize: '18px',
-    marginBottom: '20px',
+    marginBottom: '10px',
     textAlign: 'center',
   },
   messageContainer: {
