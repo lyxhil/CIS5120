@@ -29,7 +29,7 @@ const HomePage = ({groups, contacts}) => {
                 <div style={styles.chatListContainer}> {/* Apply the scrolling style here */}
                     <ChatList 
                         groups={groups}
-                        friends={contacts.slice(-8)} // This slices the array to include only the last 6 elements
+                        friends={contacts.slice(-6)} // This slices the array to include only the last 6 elements
                         showDeleteButton={false}
                         renderItem={(friend) => (
                             <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
